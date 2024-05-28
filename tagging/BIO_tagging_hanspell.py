@@ -97,20 +97,3 @@ for d in tqdm(data):
 
 df = pd.DataFrame(result_list, columns=column_list)
 df.to_csv("../Dataset/Aspect/cosmetic_aspect.csv", encoding='utf-8', index=False)
-
-
-### divide set
-test_split = GroupShuffleSplit(test_size=0.1, n_splits=1, random_state=42).split(df, groups=df['Index'])
-train_val_idxs, test_idxs = next(test_split)
-
-train_val = df.iloc[train_val_idxs]
-test = df.iloc[test_idxs]
-
-val_split = GroupShuffleSplit(test_size=0.1, n_splits=1, random_state=42).split(train_val, groups=train_val['Index'])
-train_idxs, val_idxs = next(val_split)
-train = train_val.iloc[train_idxs]
-val = train_val.iloc[val_idxs]
-
-train.to_csv(f"{dir}/cosmetic_aspect_train.csv", encoding='utf-8', index=False)
-val.to_csv(f"{dir}/cosmetic_aspect_valid.csv", encoding='utf-8', index=False)
-test.to_csv(f"{dir}/cosmetic_aspect_test.csv", encoding='utf-8', index=False)
