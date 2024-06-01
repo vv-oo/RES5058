@@ -3,7 +3,6 @@ import re
 import pandas as pd
 from hanspell import spell_checker
 from tqdm import tqdm
-from sklearn.model_selection import GroupShuffleSplit
 
 def preprocess_sentence(sentence):
     words = sentence.replace("\n", " ")
